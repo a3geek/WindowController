@@ -4,6 +4,7 @@ using System;
 
 
 namespace WindowController {
+    [AddComponentMenu("Window Controller/Window Setting")]
     public class WindowSetting : MonoBehaviour {
         [Serializable]
         public class CommandLineKeys {
