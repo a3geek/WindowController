@@ -9,11 +9,12 @@ WindowSetting.csを適当なゲームオブジェクトにアタッチする。
 - --topmost ウィンドウを最前面表示にさせる
 
 ## .batの例
-// X座標が10、Y座標が20で最前面表示で実行する  
-C:\teamLab\NurieTown3D.exe --pos-x 10 --pos-y 20 --topmost 1
+// X座標が10、Y座標が20、最前面表示で縁無しウィンドウとして実行する  
+C:\teamLab\NurieTown3D.exe -popupwindow --pos-x 10 --pos-y 20 --topmost 1
 
 ## リリース
 http://github.team-lab.local/SketchSeries/WindowController/releases
 
 ## その他
 WinAPIを利用しているのでWindowsのみ対応
+フルスクリーンモードの時は実行されない
