@@ -1,0 +1,1 @@
+.\WindowController.exe --pos-x 50 --pos-y 50 --topmost 0

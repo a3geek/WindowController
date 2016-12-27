@@ -1,13 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 
 namespace WindowController {
     public static class CommandLineHelper {
         private static readonly string KEY_PREFIX = "--";
         private static Dictionary<string, string> pairs = null;
-
 
         private static void Init() {
             if (pairs != null) {

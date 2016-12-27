@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
 using System.Text;
 using System.Timers;
-
 
 namespace WindowController {
     using HWND = System.IntPtr;
@@ -19,18 +17,7 @@ namespace WindowController {
         private const int SWP_NOMOVE = 0x0002;
         private const int HWND_TOPMOST = -1;
         private const int HWND_NOTOPMOST = -2;
-
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool MoveWindow(HWND hWnd, int x, int y, int nWidth, int nHeight, bool bRepaint);
-
-        [DllImport("user32.dll")]
-        private static extern HWND GetActiveWindow();
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GetWindowRect(HWND hWnd, out RECT lpRect);
+        
 
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT {
@@ -127,27 +114,46 @@ namespace WindowController {
             return SetToTopMost(GetCurrentWindow());
         }
 
-        delegate bool EnumWindowsProc(HWND hWnd, int lParam);
+        public static bool SetToUntopMost(HWND hWnd) {
+            return SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+        }
+
+        public static bool SetToUntopMost() {
+            return SetToUntopMost(GetCurrentWindow());
+        }
+
+        private delegate bool EnumWindowsProc(HWND hWnd, int lParam);
 
         [DllImport("user32.dll")]
-        static extern bool EnumWindows(EnumWindowsProc enumFunc, int lParam);
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool MoveWindow(HWND hWnd, int x, int y, int nWidth, int nHeight, bool bRepaint);
 
         [DllImport("user32.dll")]
-        static extern int GetWindowText(HWND hWnd, StringBuilder lpString, int nMaxCount);
+        private static extern HWND GetActiveWindow();
 
         [DllImport("user32.dll")]
-        static extern int GetWindowTextLength(HWND hWnd);
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GetWindowRect(HWND hWnd, out RECT lpRect);
 
         [DllImport("user32.dll")]
-        static extern bool IsWindowVisible(HWND hWnd);
+        private static extern bool EnumWindows(EnumWindowsProc enumFunc, int lParam);
 
         [DllImport("user32.dll")]
-        static extern HWND GetShellWindow();
+        private static extern int GetWindowText(HWND hWnd, StringBuilder lpString, int nMaxCount);
 
         [DllImport("user32.dll")]
-        static extern long GetWindowThreadProcessId(HWND hWnd, out long lpdwProcessId);
+        private static extern int GetWindowTextLength(HWND hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool IsWindowVisible(HWND hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern HWND GetShellWindow();
+
+        [DllImport("user32.dll")]
+        private static extern long GetWindowThreadProcessId(HWND hWnd, out long lpdwProcessId);
         
         [DllImport("user32.dll")]
-        static extern bool SetWindowPos(HWND hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
+        private static extern bool SetWindowPos(HWND hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
     }
 }
