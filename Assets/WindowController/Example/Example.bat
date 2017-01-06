@@ -1,1 +1,1 @@
-.\WindowController.exe --pos-x 50 --pos-y 50 --topmost 0
+.\WindowController.exe -popupwindow --pos-x 100 --pos-y 100 --topmost 1
