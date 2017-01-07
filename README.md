@@ -14,7 +14,7 @@ Windowsアプリケーションのウィンドウを操作するためのライ�
 - --topmost 1 : ウィンドウを最前面に設定します。
 
 #### batの例
-// X座標が100、Y座標が100、最前面表示で縁無しウィンドウとして実行する  
+// X座標が100、Y座標が100、最前面表示で縁無しウィンドウとして実行  
 .\\WindowController.exe -popupwindow --pos-x 100 --pos-y 100 --topmost 1
 
 より詳しい使い方は[Example](Assets/WindowController/Example/)を参照してください。
