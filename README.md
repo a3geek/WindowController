@@ -1,20 +1,41 @@
-# WindowController
-Windowsアプリケーションのウィンドウを操作するためのライブラリ。
+WindowController
+===
 
-## 使い方
-WindowSetting.csを適当なゲームオブジェクトにアタッチする。  
-アプリケーションを起動する時の.batにオプションを追加する。
-- --pos-x ウィンドウのX座標を10に指定する
-- --pos-y ウィンドウのY座標を10に指定する
-- --topmost ウィンドウを最前面表示にさせる
 
-## .batの例
-// X座標が10、Y座標が20、最前面表示で縁無しウィンドウとして実行する  
-C:\teamLab\NurieTown3D.exe -popupwindow --pos-x 10 --pos-y 20 --topmost 1
+## Description
+Windowsアプリケーションのウィンドウを操作するためのライブラリです。  
+.batでexeを起動する時の引数を拡張して、ウィンドウの操作を設定します。
 
-## リリース
-http://github.team-lab.local/SketchSeries/WindowController/releases
+## Usage
+.batでexe起動を設定する時に、必要に応じて引数を追記してください。  
+現在対応している引数は以下の通りです。
+- --pos-x 100 : ウィンドウの左上X座標を100に指定します。
+- --pos-y 100 : ウィンドウの左上Y座標を100に指定します。
+- --topmost 1 : ウィンドウを最前面に設定します。
 
-## その他
-WinAPIを利用しているのでWindowsのみ対応
-フルスクリーンモードの時は実行されない
+#### batの例
+// X座標が100、Y座標が100、最前面表示で縁無しウィンドウとして実行する  
+.\\WindowController.exe -popupwindow --pos-x 100 --pos-y 100 --topmost 1
+
+より詳しい使い方は[Example](Assets/WindowController/Example/)を参照してください。
+
+## Behaviour
+- 縁無しウィンドウでないと機能しないので、必ず-popupwindowを指定してください。
+- win32APIを利用してウィンドウを操作・設定しています。
+- 最前面設定を行うと、デフォルトでは一定間隔毎にトップ化処理をします。
+
+## API
+### `WindowController`クラス
+`WindowController`からウィンドウ操作に関する設定を変更する事が出来ます。  
+シングルトンを実装してありますので、`WindowController.Instance`でアクセス出来ます。
+
+### プロパティ
+#### `bool IsValidity`
+動作可能な環境かどうかを取得
+
+#### `bool LoopMostValidity`
+一定間隔毎のトップ化処理の有効化
+
+#### `bool MostType`
+トップ化処理の種類を設定  
+最前面か非最前面の2種類が存在します
